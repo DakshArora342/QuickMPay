@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_admin_success::page(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+ <section class="banner d-flex justify-content-center align-items-top">
+         
+         	<form th:action="@{handlePage}" method="post">
+								 
+								<br>
+								<button type="submit" class="btn bg-primary btn-lg text-white" name="action"
+										value="addPercentage">Add Percentage</button>
+										
+										
+									 
+									<button type="submit" class="btn bg-primary btn-lg text-white" name="action"
+										value="addrate">Add Rate</button>
+       
+									<button type="submit" class="btn bg-primary btn-lg text-white" name="action"
+										value="addWallet">Add Wallet</button>
+										
+										<button type="submit" class="btn bg-primary btn-lg text-white" name="action"
+										value="addTips">Add Tips</button>
+								
+									<button type="submit" class="btn bg-primary btn-lg text-white" name="action"
+										value="viewUsers">View Users</button>
+								
+									
+							</form>
+							
+							
+							
+							         
+ </section>
+</body>
+</html>

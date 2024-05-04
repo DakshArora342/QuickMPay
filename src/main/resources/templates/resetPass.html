@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::page(~{::section})}">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>SignUp Page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row justify-content-center mt-5">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="text-center mb-4">Reset Password</h2>
+							<form id="resetPasswordForm" th:action="@{resetPass}"
+								method="post">
+								<input type="text" class="form-control" 
+									name="id" th:value="${id}"
+									hidden="hidden">
+
+								<div class="form-group">
+									<input type="password" class="form-control" id="newPassword"
+										name="password" placeholder="Enter new password"
+										required="required" pattern=".{8,}"
+										title="Password must be at least 8 characters long">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"
+										id="confirmPassword" placeholder="Confirm new password"
+										required="required" pattern=".{8,}"
+										title="Password must be at least 8 characters long">
+									<div id="passwordMatchError" class="text-danger"
+										style="display: none;">Passwords do not match</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block"
+									onclick="return validatePasswords()">Reset Password</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
+<script>
+	function validatePasswords() {
+		var newPassword = document.getElementById("newPassword").value;
+		var confirmPassword = document.getElementById("confirmPassword").value;
+		if (newPassword !== confirmPassword) {
+			document.getElementById("passwordMatchError").style.display = "block";
+			return false; // Prevent form submission
+		}
+		return true; // Allow form submission
+	}
+</script>

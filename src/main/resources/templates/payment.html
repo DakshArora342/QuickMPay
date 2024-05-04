@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <script th:src="@{/js/script.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payment Page</title>
+    <style>
+        /* Add your custom CSS styles here */
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="my-card mt-4">
+                    <h5 class="text-center mb-4 title-margin">Payment Page</h5>
+                    <div class="text-center mb-4">
+                        <h2 class="text-primary">
+                            <span th:text="'$'"></span>
+                            <span th:text="${order.amount}"></span>
+                        </h2>
+                    </div>
+                    <form action="submitOrder" id="paymentForm" method="post" enctype="multipart/form-data">
+                        <!-- Trade Number and Buyed Credits -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trade-number">Trade Number</label>
+                                    <input type="text" class="form-control" id="trade-number" name="trade-number"
+                                           aria-describedby="tradeNumberHelp" th:value="${order.tradeNo}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="buyed-credits">Buyed Credits</label>
+                                    <input type="number" class="form-control" id="buyed-credits" name="buyed-credits"
+                                           aria-describedby="buyedCreditsHelp" th:value="${order.buyCredits}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Rupee Dollar Rates and Get Points -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="rupee-dollar-rates">Rupee Dollar Rates</label>
+                                    <input type="text" class="form-control" id="rupee-dollar-rates"
+                                           name="rupee-dollar-rates" aria-describedby="rupeeDollarRatesHelp"
+                                           th:value="${order.rupeeDollarRate}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="get-points">Get Points</label>
+                                    <input type="number" class="form-control" id="get-points" name="get-points"
+                                           aria-describedby="getPointsHelp" th:value="${order.getPoints}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Trade Time and Wallet Address -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trade-time">Trade Time</label>
+                                    <input type="text" class="form-control" id="trade-time" name="trade-time"
+                                           aria-describedby="tradeTimeHelp" th:value="${order.tradeTime}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+    <div class="form-group">
+        <label for="wallet-address">Wallet Address</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="wallet-address" name="wallet-address"
+                   aria-describedby="walletAddressHelp" th:value="${order.walletAddress}" readonly>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="copyTextToClipboard()">
+                    Copy
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyTextToClipboard() {
+        var textToCopy = document.getElementById('wallet-address');
+        textToCopy.select();
+        document.execCommand('copy');
+        alert('Text copied to clipboard!');
+    }
+</script>
+
+                        </div>
+                        <!-- QR Code -->
+                        <div class="form-group text-center">
+                            <label for="payment-qr">QR Code</label>
+                            <img th:src="'data:image/png;base64,' + ${base64EncodedPaymentQr}" alt="Payment QR Code" style="max-width: 100px; height: auto;">
+                        </div>
+                        
+                        <!-- Transfer Voucher -->
+                        <div class="form-group">
+                            <label for="transfer-voucher">Upload Transfer Voucher</label>
+                            <input type="file" class="form-control-file" id="transfer-voucher" name="transferVoucher" required>
+                        </div>
+                        <!-- "I Have Paid" Message -->
+                        <div class="text-center mt-4">
+                            <span id="paidMessage">If you have paid, click "I Have Paid" button</span>
+                        </div>
+                        <!-- Buttons -->
+                        <div class="container text-center mt-4">
+    <a href="/cancelOrder" class="btn btn-secondary mr-3">Cancel Order</a>
+                            <button type="submit" class="btn btn-primary" id="paidButton" disabled>I Have Paid</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

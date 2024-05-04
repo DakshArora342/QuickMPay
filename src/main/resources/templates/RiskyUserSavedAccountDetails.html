@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <script th:src="@{/js/script.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">Account Details</h1>
+                        
+                         <!-- Check if account details object exists -->
+                    <form th:action="@{/safeUserAccountDetails}"  method="post" th:if="${accountDetails != null}"novalidate>
+                            
+                             <div class="form-group">
+                                <input type="text"  class="form-control" id="recharge-type"
+                                aria-describedby="emailHelp" placeholder="Account Type" required="true"
+                                value="Risky" readonly></div>
+                        
+                            <div class="form-group">
+                                <input type="text" name="accountHolderName" class="form-control" id="name" placeholder="Enter Your Name" required="true" th:value="${accountDetails.accountHolderName}">
+                            </div>
+                            <!-- Account Number -->
+                            <div class="form-group">
+                                <input type="text" name="accountNumber" class="form-control" id="accountNumber" placeholder="Enter Your Account Number" required="true" th:value="${accountDetails.accountNo}">
+                            </div>
+                            <!-- Bank Name -->
+                            <div class="form-group">
+                                <input type="text" name="bankName" class="form-control" id="bankName" placeholder="Enter Your Bank Name" required="true" th:value="${accountDetails.bankName}">
+                            </div>
+                            <!-- IFSC Code -->
+                            <div class="form-group">
+                                <input type="text" name="ifscCode" class="form-control" id="ifscCode" placeholder="Enter IFSC Code" required="true" th:value="${accountDetails.ifscCode}">
+                            </div>
+                            
+                            <div class="container text-center">
+<a href="addRiskyAccount" class="btn btn-secondary">Change Account Details</a>
+                            </div>
+                        </form>
+                    <!-- Display "Submit Form" button if account details object doesn't exist -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

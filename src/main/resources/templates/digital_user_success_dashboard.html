@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Digital User Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        .integral-section {
+            margin-top: 50px;
+        }
+        .integral-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<section class="banner d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h1>Digital Account</h1>
+         <br>
+ <br>
+<div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card bg-primary text-white rounded-lg shadow-lg mb-3">
+                        <div class="card-body text-center">
+                            <h5 class="font-weight-bold mb-4">Account Balance</h5>
+                            <p class="font-weight-bold text-success display-5" th:text="${session.accountBalance}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-primary text-white rounded-lg shadow-lg mb-3">
+                        <div class="card-body text-center">
+                            <h5 class="font-weight-bold mb-4">Account Pending Balance</h5>
+                            <p class="font-weight-bold text-warning display-5" th:text="${session.pendingAccountBalance}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{optionsHandler}" method="post">
+            <p class="text-center text-danger" th:text="${msg}"></p>
+            <button type="submit" value="digitalRecharge" name="action" class="btn bg-primary btn-lg text-white">Recharge</button>
+            <button type="submit" value="adddigitalAccount" name="action" class="btn bg-primary btn-lg text-white">Add UPI Id/QR</button>
+            <button type="submit" value="rechargeLog" name="action" class="btn bg-primary btn-lg text-white">Recharge Log</button>
+            <button type="submit" value="orderRecord" name="action" class="btn bg-primary btn-lg text-white">Record</button>
+            <button type="submit" value="uploadKyc" name="action" class="btn bg-primary btn-lg text-white">Upload KYC</button>
+        </form>
+    </div>
+</section>
+
+
+
+</body>
+</html>

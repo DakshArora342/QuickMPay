@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <script th:src="@{/js/script.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recharge Page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="my-card mt-1">
+                <h1 class="text-center">Recharge Now</h1>
+                
+                <form action="placeOrder" id="rechargeForm" method="post" novalidate>
+                                <div id="recharge-points-error" style="color: red;"></div>
+                
+                    <input type="hidden" id="dollar-rate" th:value="${dollarRate}" />
+                    <!-- You can add a hidden input for percentage similarly -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="orderType" class="form-control" id="recharge-type"
+                                aria-describedby="emailHelp" placeholder="Recharge Type" required="true"
+                                th:value="${rechargeType}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" name="buyCredits" class="form-control" id="recharge-points"
+                                       aria-describedby="emailHelp" placeholder="Enter Recharge Points" required="true"
+                                       oninput="calculateAmount()">
+
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" readonly="readonly" name="getPoints" class="form-control"
+                                id="arrival-points" aria-describedby="emailHelp" placeholder="Arrival Points">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" readonly="readonly" name="amount" class="form-control"
+                                id="payment-amount" aria-describedby="emailHelp" placeholder="Payment Amount">
+                            <div class="input-group-append">
+                                <span class="input-group-text">$</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Next Step</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+
+</body>
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var rechargePointsInput = document.getElementById("recharge-points");
+    var rechargePointsError = document.getElementById("recharge-points-error");
+    var submitBtn = document.getElementById("submitBtn");
+
+    rechargePointsInput.addEventListener("input", validateRechargePoints);
+
+    function validateRechargePoints() {
+        var rechargePointsValue = parseFloat(rechargePointsInput.value);
+
+        if (rechargePointsValue < 10000) {
+            rechargePointsError.textContent = "Recharge points must be at least 10000.";
+            rechargePointsInput.setCustomValidity("Recharge points must be at least 10000.");
+        } else {
+            rechargePointsError.textContent = "";
+            rechargePointsInput.setCustomValidity("");
+        }
+        
+        // Check if the recharge points are 10000 or above
+        if (rechargePointsValue >= 10000) {
+            submitBtn.disabled = false; // Enable the submit button
+        } else {
+            submitBtn.disabled = true; // Disable the submit button
+        }
+    }
+});
+
+</script>

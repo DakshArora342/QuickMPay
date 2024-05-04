@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_admin_success::page(~{::section})}">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Add Wallet</title>
+</head>
+<body>
+	<section>
+	 
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-8 offset-md-2">
+
+					<div class="my-card mt-1">
+					
+						<h1 class="text-center">Add Wallet Page</h1>
+              </div>
+						<form th:action="@{addWallet}" method="post" enctype="multipart/form-data">
+
+							<div class="form-group">
+								<input type="text"
+									name="walletNo" class="form-control " id="walletNo"
+									aria-describedby="emailHelp" placeholder="Enter Wallet Number"
+									required="true">
+							</div>
+							
+							<div class="form-group">
+								<input type="file"
+									name="qr" class="form-control-file" id="qrCode"
+									aria-describedby="fileHelp" accept=".png, .jpg, .jpeg">
+								<small id="fileHelp" class="form-text text-muted">Upload QR code image (PNG, JPG, JPEG format)</small>
+							</div>
+ 
+ 						    <br>
+ 						    <br>
+ 						    
+ 						  
+							<div class="container text-center">
+								<button type="submit" class="btn btn-success">Add Wallet</button>
+							</div>
+
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>

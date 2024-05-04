@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Dashboard</title>
+</head>
+<body>
+ <section class="banner d-flex justify-content-center align-items-center">
+     <div class="text-center">
+     Tip of the day
+<p class="text-center text-danger" th:if="${session.tips}" th:text="${session.tips.tip}"></p>
+     
+        <h1 class="mb-4">Choose Your Account Type</h1>
+        <form th:action="@{optionsHandler}" method="post">
+            <div class="btn-group">
+                <button type="submit" name="action" value="safe" class="btn btn-primary btn-lg mr-2">Safe Account</button>
+                <button type="submit" name="action" value="digital" class="btn btn-success btn-lg mr-2">Digital Account</button>
+                <button type="submit" name="action" value="risky" class="btn btn-danger btn-lg">Risky Account</button>
+                
+            </div>
+        </form>
+    </div>
+ </section>
+ 
+</body>
+</html>

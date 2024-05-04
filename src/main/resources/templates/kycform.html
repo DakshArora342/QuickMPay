@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Rate</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h2 class="text-center mb-4">KYC Form</h2>
+                    <form id="kycForm" action="kycUpload" method="post" enctype="multipart/form-data">
+                        <!-- Aadhar Front Page -->
+                        <div class="form-group">
+                            <label for="aadharFrontPage">Aadhar Front Page:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="aadharFrontPage" name="aadharFrontPage" accept="image/*" required>
+                                <label class="custom-file-label" for="aadharFrontPage">Choose file</label>
+                            </div>
+                            <small id="aadharFrontPageName" class="form-text text-muted">No file chosen</small>
+                        </div>
+                        <!-- Aadhar Back Page -->
+                        <div class="form-group">
+                            <label for="aadharBackPage">Aadhar Back Page:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="aadharBackPage" name="aadharBackPage" accept="image/*" required>
+                                <label class="custom-file-label" for="aadharBackPage">Choose file</label>
+                            </div>
+                            <small id="aadharBackPageName" class="form-text text-muted">No file chosen</small>
+                        </div>
+                        <!-- PAN Card -->
+                        <div class="form-group">
+                            <label for="panCard">PAN Card:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="panCard" name="panCard" accept="image/*" required>
+                                <label class="custom-file-label" for="panCard">Choose file</label>
+                            </div>
+                            <small id="panCardName" class="form-text text-muted">No file chosen</small>
+                        </div>
+                        <!-- Submit Button -->
+                        <button type="button" class="btn btn-primary btn-block" onclick="validateForm()">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+   
+</body>
+</html>
+ <script >
+    // Function to display selected file names
+    function displayFileName(inputId, labelId) {
+        var input = document.getElementById(inputId);
+        var label = document.getElementById(labelId);
+        var fileName = input.files[0].name;
+        label.innerText = fileName;
+    }
+
+    // Event listeners for file inputs
+    document.getElementById('aadharFrontPage').addEventListener('change', function() {
+        displayFileName('aadharFrontPage', 'aadharFrontPageName');
+    });
+    document.getElementById('aadharBackPage').addEventListener('change', function() {
+        displayFileName('aadharBackPage', 'aadharBackPageName');
+    });
+    document.getElementById('panCard').addEventListener('change', function() {
+        displayFileName('panCard', 'panCardName');
+    });
+
+
+    </script>
+   

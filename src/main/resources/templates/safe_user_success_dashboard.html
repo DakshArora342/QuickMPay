@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Dashboard</title>
+</head>
+<body>
+
+<section class="banner d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h1>Safe Account</h1>
+        <br>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card bg-primary text-white rounded-lg shadow-lg mb-3">
+                        <div class="card-body text-center">
+                            <h5 class="font-weight-bold mb-4">Account Balance</h5>
+                            <p class="font-weight-bold text-success display-5" th:text="${session.accountBalance}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-primary text-white rounded-lg shadow-lg mb-3">
+                        <div class="card-body text-center">
+                            <h5 class="font-weight-bold mb-4">Account Pending Balance</h5>
+                            <p class="font-weight-bold text-warning display-5" th:text="${session.pendingAccountBalance}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form th:action="@{optionsHandler}" method="post">
+            <p class="text-center text-danger" th:text="${msg}"></p>
+
+            <button type="submit" value="safeRecharge" name="action" class="btn bg-primary btn-lg text-white">Recharge</button>
+            <button type="submit" value="addSafeAccount" name="action"  class="btn bg-primary btn-lg text-white">Add Account</button>
+            <button type="submit" value="rechargeLog" name="action" class="btn bg-primary btn-lg text-white">Recharge Log</button>
+            <button type="submit" value="orderRecord" name="action" class="btn bg-primary btn-lg text-white">Record</button>
+            <button type="submit" value="uploadKyc" name="action"class="btn bg-primary btn-lg text-white">Upload Kyc</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_success::page(~{::section})}">
+<head>
+    <script th:src="@{/js/script.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recharge Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        .custom-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .custom-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-card .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .custom-card .card-header h5 {
+            margin-bottom: 0;
+        }
+
+        .custom-card .card-body {
+            padding: 20px;
+        }
+
+        .custom-card .card-text {
+            margin-bottom: 5px;
+            font-size: 10px; /* Decrease font size further */
+        }
+
+        .custom-card .card-img {
+            max-height: 150px;
+            width: auto;
+        }
+
+        /* Align text and button to the right end */
+        .text-right {
+            text-align: right !important;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <h1 class="text-center mb-4">Recharge Log</h1>
+            <!-- Recharge cards -->
+            <div th:each="order : ${orderList}" class="row">
+                <div class="col-lg-12">
+                    <div class="card custom-card">
+                        <div class="card-header">
+                            <h5 class="card-title text-center" th:text="'Trade Number: ' + ${order.tradeNo}"></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text"><strong>Order Status:</strong></p>
+                                    <p class="card-text"><strong>Buy Point:</strong></p>
+                                    <p class="card-text"><strong>Topup Fees:</strong></p>
+                                    <p class="card-text"><strong>Get Points:</strong></p>
+                                    <p class="card-text"><strong>Payment Amount:</strong></p>
+                                    <p class="card-text"><strong>Trade Time:</strong></p>
+                                    <p class="card-text"><strong>Payment Voucher:</strong></p>
+                                </div>
+                                <div class="col-md-6 text-right"> <!-- Align to right -->
+                                    <p class="card-text"><span th:text="${order.status}"></span></p>
+                                    <p class="card-text"><span th:text="${order.buyCredits}"></span></p>
+                                    <p class="card-text">
+                                        <span th:text="${order.topupFees} + '%'"></span>
+                                    </p>
+                                    <p class="card-text"><span th:text="${order.getPoints}"></span></p>
+                                    <p class="card-text"><span th:text="'$' + ${order.amount}"></span></p>
+                                    <p class="card-text"><span th:text="${order.tradeTime}"></span></p>
+                                    <p class="card-text">
+                                           <button class="look_over" th:attr="data-transfer-voucher=${#strings.toString(order.encodedTransferVoucher)}" onclick="showModel(this.getAttribute('data-transfer-voucher'))" id="20240428005941989" data-toggle="modal" data-target="#exampleModal" style="float: right;color: white;font-weight: bold;background-color: blue;border:none;line-height: 25px;height: 25px;border-radius: 6px;">Look over</button>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Recharge cards -->
+        </div>
+        
+            
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+   
+        <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       
+      <div class="modal-body"  >
+       <span id="picture"></span>
+      </div>
+       </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    function showModel(encodedData) {
+    	 
+        if (encodedData) {
+            var imageData = 'data:image/jpeg;base64,' + encodedData;
+            $('#picture').html("<img src='" + imageData + "' height='400px' width='400px' alt='Image Not Available'>");
+        } else {
+            // Handle case when encodedData is empty or undefined
+            console.log("No image data available.");
+        }
+    }
+</script>
+ 
+
+
+        
+    </section>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
