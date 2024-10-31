@@ -18,19 +18,3 @@ spring:
     
 server:
   port: 80
-
-
-
-#  mail:
-#    properties:
-#      mail:
-#        smtp:
-#          starttls:
-#            enable: true
-#          auth: true
-#    host: smtp.gmail.com
-#    port: 587
-#    username: aroratheaksh@gmail.com
-#    password: gopb gjcx vigy pllz
-
-        
